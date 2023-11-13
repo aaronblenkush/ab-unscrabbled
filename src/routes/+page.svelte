@@ -1,6 +1,5 @@
 <svelte:head>
     <title>Unscrabbled | llama</title>
-    <link rel="icon" href="/favicon.ico" />
 </svelte:head>
 
 <script>
@@ -12,8 +11,6 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 //
 // server data
 export let data;
-
-let dictionary = new Set(data.dictionary);
 
 //
 // user interface variables
@@ -32,7 +29,10 @@ let show_help = false;
 //
 // reactive vars
 
+$: dictionary = data && new Set(data.dictionary);
+
 $: suggestions =
+    data &&
     !max_results
         || !suggest
         || !search
@@ -43,12 +43,19 @@ $: suggestions =
     : getSuggestions()
 ;
 
-$: solutions = !max_results || !solver_maxlength || !solver_minlength || !solve || !search || search.length < 2
+$: solutions =
+    data &&
+    !max_results
+        || !solver_maxlength
+        || !solver_minlength
+        || !solve
+        || !search
+        || search.length < 2
     ? []
     : getSolutions()
 ;
 
-$: valid = dictionary.has(search.toUpperCase());
+$: valid = data && dictionary.has(search.toUpperCase());
 
 let keyboard = [
     ['Q','W','E','R','T','Y','U','I','O','P'],
@@ -70,12 +77,12 @@ onMount(async () => {
     // load data
     let res = await fetch("./scrabble-dictionary.txt");
     let txt = await res.text();
-    data.dictionary = txt.split("\n")
+    let dictionary = txt.split("\n")
         .map(line => {
             return line.trim().split(" ")[1];
         })
     ;
-    data.solver = data.dictionary.reduce(
+    let solver = dictionary.reduce(
         ((acc,word) => {
             let token = [...word].sort().join('');
             acc[token] = acc[token] || [];
@@ -84,6 +91,7 @@ onMount(async () => {
         }),
         {}
     );
+    data = { dictionary, solver };
     disabled = false;
 });
 
