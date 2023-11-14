@@ -1,7 +1,3 @@
-import { browser } from "$app/environment";
-
-
-
 export function api(customFetch = fetch) {
     return {
         getDictionary: async () => {
@@ -22,7 +18,6 @@ export function api(customFetch = fetch) {
                 }),
                 {}
             );
-            console.log('done');
             return { dictionary, solver };
         },
     };
