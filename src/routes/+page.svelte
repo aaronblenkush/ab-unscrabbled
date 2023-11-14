@@ -21,7 +21,6 @@ export let data;
 //
 // user interface variables
 let mounted = true;
-let disabled = true;
 let search = '';
 let suggest = false;
 let solve = false;
@@ -32,8 +31,11 @@ let max_results = 200;
 let search_maxlength = 16;
 let show_help = false;
 
+
 //
 // reactive vars
+
+$: disabled = !!!data;
 
 $: dictionary = data && new Set(data.dictionary);
 
@@ -75,31 +77,6 @@ let points = [
     acc[String.fromCharCode(65 + i)] = point;
     return acc;
 },{})
-
-onMount(async () => {
-    // render after fonts loaded
-    document.fonts.ready.then(() => mounted = true);
-
-    // load data
-    let res = await fetch("./scrabble-dictionary.txt");
-    let txt = await res.text();
-    let dictionary = txt.split("\n")
-        .map(line => {
-            return line.trim().split(" ")[1];
-        })
-    ;
-    let solver = dictionary.reduce(
-        ((acc,word) => {
-            let token = [...word].sort().join('');
-            acc[token] = acc[token] || [];
-            acc[token].push(word);
-            return acc;
-        }),
-        {}
-    );
-    data = { dictionary, solver };
-    disabled = false;
-});
 
 //
 // app fns
