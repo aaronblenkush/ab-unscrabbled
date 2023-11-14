@@ -1,3 +1,5 @@
+
+
 <script>
 
 import {page} from '$app/stores';
@@ -197,15 +199,12 @@ function keyhandle(e) {
 
 
 
-
-
 <!--BODY -->
 {#if mounted}
 <div class="bg-white flex flex-col m-0 p-2 max-w-md mx-auto h-full select-none flex flex-col gap-12">
     <div class="flex flex-col gap-2">
         <div class="shrink mx-auto">
-            <a
-                href="{$page.url.pathname}"
+            <span
                 rel="external"
                 class="text-3xl text-center"
             >
@@ -216,7 +215,7 @@ function keyhandle(e) {
                 <span class="inline-block p-1 bg-yellow-200 border mx-px border-gray-500 border-yellow-750">{s}</span>
                 {/if}
                 {/each}
-            </a>
+            </span>
         </div>
         <div class="shrink flex gap-2">
             <div class="ml-1 my-auto">
