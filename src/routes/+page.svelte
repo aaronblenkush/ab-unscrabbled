@@ -1,8 +1,18 @@
 <script>
 
 import {page} from '$app/stores';
-import '@fortawesome/fontawesome-free/css/all.min.css';
-    import { onMount } from 'svelte';
+import Fa from 'svelte-fa';
+import {
+    faCircleQuestion, faDeleteLeft, faFlag, faHeartCircleCheck,
+    faSquareCheck, faSquareXmark, faToggleOff, faToggleOn,
+    faQuestionCircle
+}
+from '@fortawesome/free-solid-svg-icons';
+import {
+    faQuestionCircle as faQuestionCircleRegular
+}
+from '@fortawesome/free-regular-svg-icons';
+
 
 //
 // server data
@@ -229,13 +239,17 @@ function keyhandle(e) {
             <div class="ml-1 my-auto">
                 {#if valid || search == "ILOVEYOU"}
                 <button {disabled} on:mousedown="{() => search = ""}">
-                    <i class="text-green-500 fa-solid text-3xl
-                    {search == "ILOVEYOU" ? "fa-heart-circle-check" : "fa-square-check"}
-                    "></i>
+                    <Fa
+                        icon={search == "ILOVEYOU" ? faHeartCircleCheck : faSquareCheck}
+                        class="text-green-500 text-3xl"
+                    />
                 </button>
                 {:else}
                 <button {disabled} on:mousedown="{() => search = ""}">
-                    <i class="text-red-500 fa-solid fa-square-xmark text-3xl {search.length == 0 ? "opacity-0" : ""}"></i>
+                    <Fa
+                        icon={faSquareXmark}
+                        class="text-red-500 text-3xl {search.length == 0 && "opacity-0"}"
+                    />
                 </button>
                 {/if}
             </div>
@@ -258,7 +272,10 @@ function keyhandle(e) {
                     }
                 }}"
             >
-                <i class="my-auto fa-solid fa-delete-left"></i>
+                <Fa
+                    icon={faDeleteLeft}
+                    class="my-auto fa-solid fa-delete-left"
+                />
             </button>
         </div>
 
@@ -301,42 +318,52 @@ function keyhandle(e) {
             <button
                 {disabled}
                 on:mousedown={() => toggleSolve()}
-                class="flex items-center rounded-xl border-2 p-2 {solve ? "text-green-700" : ""}"
+                class="items-center rounded-xl border-2 p-2 {solve ? "text-green-700" : ""}"
             >
                 Solver
-                <i class="px-2 leading-3 my-auto text-2xl fa-solid fa-toggle-{solve ? "on" : "off"}"></i>
+                <Fa
+                    icon={solve ? faToggleOn : faToggleOff}
+                    class="px-2 leading-3 my-auto text-2xl"
+                />
 
             </button>
             <div
-                class="flex items-center rounded-xl border-2 p-2"
+                class="flex flex-row gap-2 items-center rounded-xl border-2 p-2"
             >
                 <button
                     {disabled}
-                    class="flex items-center {suggest ? "text-green-700" : ""}"
+                    class="items-center {suggest ? "text-green-700" : ""}"
                     on:mousedown={() => toggleSuggest()}
                 >
                     Search
-                    <i
-                        class="px-2 leading-3 my-auto text-2xl fa-solid fa-toggle-{suggest ? "on" : "off"}"
+                    <Fa
+                        icon={suggest ? faToggleOn : faToggleOff}
+                        class="px-2 leading-3 my-auto text-2xl"
                     />
                 </button>
 
                 <button
-                {disabled}
-                    class="flex items-center text-xs uppercase {suggest && suggest_exact ? "text-green-700" : ""}"
+                    disabled={disabled || !suggest}
+                    class="items-center {suggest && suggest_exact ? "text-green-700" : ""}"
                     on:mousedown={() => toggleExact()}
                     >
                     Exact:
-                    <i class="px-2 leading-3 my-auto text-2xl fa-solid fa-toggle-{suggest_exact ? "on" : "off"}"></i>
+                    <Fa
+                        icon={(suggest && suggest_exact) ? faToggleOn : faToggleOff}
+                        class="px-2 leading-3 my-auto text-2xl"
+                    />
                 </button>
             </div>
             <button
                 {disabled}
-                class="flex items-center rounded-xl border-2 p-2"
+                class="items-center rounded-xl border-2 p-2"
                 on:mousedown={() => {show_help = !show_help; if (show_help) window.location = '#help'}}
             >
                 Help:
-                <i class="px-2 leading-3 my-auto text-xl fa-{show_help ? "solid" : "regular"} fa-circle-question"></i>
+                <Fa
+                    icon={show_help ? faQuestionCircle : faQuestionCircleRegular}
+                    class="fa-regular px-2 leading-3 my-auto text-xl"
+                />
             </button>
         </div>
 

@@ -9,6 +9,9 @@
     },
     "devDependencies": {
         "@fortawesome/fontawesome-free": "^6.4.2",
+        "@fortawesome/fontawesome-svg-core": "^6.4.2",
+        "@fortawesome/free-regular-svg-icons": "^6.4.2",
+        "@fortawesome/free-solid-svg-icons": "^6.4.2",
         "@sveltejs/adapter-auto": "^2.0.0",
         "@sveltejs/adapter-vercel": "^3.0.3",
         "@sveltejs/kit": "^1.20.4",
@@ -17,6 +20,7 @@
         "postcss": "^8.4.24",
         "postcss-load-config": "^4.0.1",
         "svelte": "^4.0.5",
+        "svelte-fa": "^3.0.4",
         "tailwindcss": "^3.3.2",
         "vite": "^4.4.2"
     },
