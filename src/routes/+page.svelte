@@ -153,11 +153,17 @@ function getSolutions() {
 }
 
 function toggleSolve(x) {
-    solve = typeof x === "undefined" ? !solve : x; if (solve) suggest = false;
+    solve = typeof x === "undefined" ? !solve : x;
+    if (solve) {
+        suggest = false;
+        // suggest_exact = false;
+    }
 }
 
 function toggleSuggest(x) {
-    suggest = typeof x === "undefined" ? !suggest : x; if (suggest) solve = false;
+    suggest = typeof x === "undefined" ? !suggest : x;
+    if (suggest) solve = false;
+    // else suggest_exact = false;
 }
 
 function toggleExact(x) {
