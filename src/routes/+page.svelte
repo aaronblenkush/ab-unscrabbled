@@ -1,7 +1,3 @@
-<svelte:head>
-    <title>Unscrabbled | llama</title>
-</svelte:head>
-
 <script>
 
 import {page} from '$app/stores';
