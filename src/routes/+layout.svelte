@@ -1,5 +1,5 @@
 <svelte:head>
-    <title>Unscrabbled | llama</title>
+    <title>Unscrabbled</title>
 </svelte:head>
 
 <script>
