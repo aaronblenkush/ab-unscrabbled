@@ -482,7 +482,16 @@ function keyhandle(e) {
     </div>
     <div class="text-center text-gray-500">
         SCRABBLE&trade; is a registered trademark of HASBRO, INC.
-        Copyright &copy; 2023 Aaron Blenkush. All rights reserved.
+        Copyright &copy; 2023 
+        <a href="https://aaronblenkush.github.io">
+            Aaron Blenkush</a>.
+        All rights reserved.
     </div>
 </div>
 {/if}
+
+<style lang="postcss">
+    a {
+        @apply text-blue-500 hover:underline
+    }
+</style>
